@@ -5,4 +5,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="no_connection">No internet connection, please check your network to get updates</string>
     <string name="connected">Internet connected,Now you can get updates</string>
+    <string name="posts_title">Posts</string>
+    <string name="comments_title">Comments</string>
+    <string name="user_name">Name:</string>
+    <string name="email">Email:</string>
 </resources>

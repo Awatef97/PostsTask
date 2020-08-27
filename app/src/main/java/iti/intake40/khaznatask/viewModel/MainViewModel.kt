@@ -15,9 +15,9 @@ class MainViewModel @ViewModelInject constructor(
 
     var  postsList = MutableLiveData<List<PostsModel>>()
     var  postDetailList = MutableLiveData<List<PostDetailsModel>>()
-    var message =MutableLiveData<Int>()
-    val postId:LiveData<Int>
-        get() =message
+    var postId =MutableLiveData<Int>()
+    //val postId:LiveData<Int>
+      //  get() =message
 
     fun getAllPosts(): LiveData<List<PostsModel>> {
 
@@ -49,7 +49,7 @@ class MainViewModel @ViewModelInject constructor(
 
 
     fun setMsgCommunicator(msg:Int) {
-        message.postValue(msg)
+        postId.postValue(msg)
 
 
 

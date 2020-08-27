@@ -19,4 +19,5 @@ class Repository @Inject constructor(
      fun getCashedPosts() = postsDao.getCashedPosts()
     suspend fun insertAllDetails(postDetailsModel: List<PostDetailsModel>) = postsDao.insertPostsDetails(postDetailsModel)
     fun  getCashedDetails(postId:Int) = postsDao.getCashedPostsDetails(postId)
+
 }

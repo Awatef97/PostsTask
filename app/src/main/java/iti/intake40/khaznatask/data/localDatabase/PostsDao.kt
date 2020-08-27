@@ -22,4 +22,5 @@ interface PostsDao {
 
     @Query("SELECT * FROM comments WHERE postId = :postId ")
     fun getCashedPostsDetails(postId:Int):LiveData<List<PostDetailsModel>>
+
 }

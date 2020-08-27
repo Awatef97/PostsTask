@@ -11,16 +11,45 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <TextView
+            android:id="@+id/posts_bar_title"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@color/header_color"
+            android:gravity="center"
+            android:paddingTop="50dp"
+            android:text="@string/posts_title"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/posts_referesh"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ImageView
-            android:id="@+id/noData"
+            android:id="@+id/no_date_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/logo"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@+id/itemsswipetorefresh"
-            app:layout_constraintEnd_toEndOf="@+id/itemsswipetorefresh"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/no_data_txt"
+            app:layout_constraintEnd_toEndOf="@+id/posts_referesh"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/no_data_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="200dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="@string/no_connection"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/posts_referesh"
+            app:layout_constraintEnd_toEndOf="@+id/posts_referesh"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/no_date_img" />
 
         <ProgressBar
             android:id="@+id/postsProgressBar"
@@ -28,24 +57,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="@+id/itemsswipetorefresh"
+            app:layout_constraintBottom_toBottomOf="@+id/posts_referesh"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/itemsswipetorefresh"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/posts_referesh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintStart_toStartOf="parent">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/postsRecycle"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:paddingTop="50dp">
 
             </androidx.recyclerview.widget.RecyclerView>
 

@@ -32,13 +32,13 @@ class PostDetailsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
+
         return inflater.inflate(R.layout.fragment_post_details, container, false)
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setUpObservers()
-
+        refreshPosts()
 
     }
     fun setUpRecycle(list: List<PostDetailsModel>){
@@ -51,7 +51,19 @@ class PostDetailsFragment : Fragment() {
     fun setUpObservers(){
         model.postId.observe(viewLifecycleOwner, Observer { postId ->
             model.getCachedDetail(postId).observe(viewLifecycleOwner, Observer {
+                if(it.isNullOrEmpty()&&!NetworkConnection.checkConnection(requireContext()))
+                {
+                    detailsProgressBar.visibility = View.GONE
+                    no_detail_txt.visibility = View.VISIBLE
+                    no_detail_img.visibility = View.VISIBLE
+
+                }else if(!it.isNullOrEmpty()){
+                    detailsProgressBar.visibility = View.GONE
                     setUpRecycle(it)
+                }else{
+                    model.getPostDetails(postId)
+                }
+
             })
 
         })
@@ -59,5 +71,21 @@ class PostDetailsFragment : Fragment() {
 
     }
 
+    fun refreshPosts(){
+        detailswipetorefresh.setColorSchemeColors(Color.WHITE)
+        detailswipetorefresh.setOnRefreshListener {
+            if(!NetworkConnection.checkConnection(requireContext())){
+                detailswipetorefresh.isRefreshing = false
+            }else {
+                model.postId.observe(viewLifecycleOwner, Observer { postId ->
 
+                    model.getPostDetails(postId)
+                    model.getPostDetails(postId).observe(viewLifecycleOwner, Observer {
+                        setUpRecycle(it)
+                    })
+                })
+            }
+            detailswipetorefresh.isRefreshing = false
+        }
+    }
 }

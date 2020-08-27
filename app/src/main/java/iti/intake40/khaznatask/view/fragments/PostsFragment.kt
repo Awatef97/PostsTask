@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -50,12 +49,13 @@ class PostsFragment : Fragment(),PostsAdapter.OnClickListener {
                 if(it.isNullOrEmpty()&&!NetworkConnection.checkConnection(requireContext()))
                 {
                     postsProgressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), R.string.no_connection, Toast.LENGTH_SHORT)
-                        .show()
-                    noData.visibility = View.VISIBLE
+                    no_date_img.visibility = View.VISIBLE
+                    no_data_txt.visibility = View.VISIBLE
+                }else if(!it.isNullOrEmpty()){
+                    postsProgressBar.visibility = View.GONE
+                    setUpRecycle(it)
                 }else{
                     model.getAllPosts()
-                    setUpRecycle(it)
                 }
 
             })
@@ -63,23 +63,23 @@ class PostsFragment : Fragment(),PostsAdapter.OnClickListener {
 
     }
     fun refreshPosts(){
-        itemsswipetorefresh.setColorSchemeColors(Color.WHITE)
-        itemsswipetorefresh.setOnRefreshListener {
+        posts_referesh.setColorSchemeColors(Color.WHITE)
+        posts_referesh.setOnRefreshListener {
             if(!NetworkConnection.checkConnection(requireContext())){
-                itemsswipetorefresh.isRefreshing = false
+                posts_referesh.isRefreshing = false
             }else {
-                model.getAllPosts().observe(viewLifecycleOwner, Observer {
+                model.getAllPosts()
+                model.getCachedPosts().observe(viewLifecycleOwner, Observer {
                     setUpRecycle(it)
                 })
 
             }
-            itemsswipetorefresh.isRefreshing = false
+            posts_referesh.isRefreshing = false
         }
     }
 
     override fun onClickedPost(postId: Int) {
         model.setMsgCommunicator(postId)
-        model.getPostDetails(postId)
         val nextFrag = PostDetailsFragment()
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.main_layout, nextFrag)
