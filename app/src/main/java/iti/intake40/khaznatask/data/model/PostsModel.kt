@@ -1,10 +1,14 @@
 package iti.intake40.khaznatask.data.model
 
-import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 
+@Entity(tableName = "posts")
 data class PostsModel(
+    var userId:Int,
+    @PrimaryKey
     var id:Int,
     var title:String,
     var body:String
