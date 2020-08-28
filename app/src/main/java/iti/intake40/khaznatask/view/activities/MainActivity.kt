@@ -15,7 +15,6 @@ class MainActivity : AppCompatActivity() {
         val nextFrag = PostsFragment()
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_layout, nextFrag)
-            //.addToBackStack(null)
             .commit()
 
 

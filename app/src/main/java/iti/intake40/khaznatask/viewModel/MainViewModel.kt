@@ -16,8 +16,7 @@ class MainViewModel @ViewModelInject constructor(
     var  postsList = MutableLiveData<List<PostsModel>>()
     var  postDetailList = MutableLiveData<List<PostDetailsModel>>()
     var postId =MutableLiveData<Int>()
-    //val postId:LiveData<Int>
-      //  get() =message
+
 
     fun getAllPosts(): LiveData<List<PostsModel>> {
 
@@ -30,10 +29,10 @@ class MainViewModel @ViewModelInject constructor(
                             postsList.postValue(response.body())
                         response.body()?.let { insertPosts(it) }
                     }else{
-                        Log.i("llllllllll",response.message())
+                        Log.i("response",response.message())
                     }
                 }catch (e: HttpException){
-                    Log.i("llllllllll",e.message())
+                    Log.i("response",e.message())
                 }
 
             }
@@ -45,7 +44,7 @@ class MainViewModel @ViewModelInject constructor(
     fun insertPosts(postsModel: List<PostsModel>) = viewModelScope.launch(Dispatchers.IO) {
         repo.insertPosts(postsModel)
     }
-    /////////////////////
+
 
 
     fun setMsgCommunicator(msg:Int) {
@@ -66,10 +65,10 @@ class MainViewModel @ViewModelInject constructor(
                             postDetailList.postValue(response.body())
                         response.body()?.let { insertDetail(it) }
                     }else{
-                        Log.i("llllllllll",response.message())
+                        Log.i("response",response.message())
                     }
                 }catch (e: HttpException){
-                    Log.i("llllllllll",e.message())
+                    Log.i("response",e.message())
                 }
 
             }

@@ -26,7 +26,6 @@ class PostsAdapter (private val postsList: List<PostsModel>, fragment:PostsFragm
 
     override fun onBindViewHolder(holder: VH, position: Int) {
          postsModel = postsList.get(position)
-        Log.i("llllllllll",postsList.size.toString())
         if(selectedPosition!=position) {
             holder.itemView.setOnClickListener {
                 listener.onClickedPost(postsList.get(position).id)
