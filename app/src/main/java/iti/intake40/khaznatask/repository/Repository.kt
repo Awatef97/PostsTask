@@ -14,6 +14,7 @@ class Repository @Inject constructor(
     //remote
     suspend fun getAllPosts() = retrofitClient.getAllPosts()
     suspend fun getAllDetails(postId:Int) = retrofitClient.getAllDetails(postId)
+
     //local
     suspend fun insertPosts(postsModel: List<PostsModel>) = postsDao.insertPosts(postsModel)
      fun getCashedPosts() = postsDao.getCashedPosts()
